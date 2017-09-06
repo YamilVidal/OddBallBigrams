@@ -1,7 +1,6 @@
 % 06/09/2016 - Created by Yamil Vidal @ L2R Lab, SISSA
 
 function TheMainScript
-%% ========================================================================
 %% Parameters
 
 % Experiment name
@@ -13,19 +12,21 @@ GetSubInfo;
 filename = [exp_name '-' num2str(sbj.n) '-' sbj.name '-' datestr(now, 'dd-mm-yyyy')];
 
 %% Timing
-t1 = 1.0; % time for the trial number
-t2 = 0.5; % time from the question to the onset of the test word
-t3 = 0.5; % time between test words
-t4 = 0.3; % time after they give an answer and before moving to the next trial
+
+NBlocks = 5;
+NWords  = 200;
+
+B.PresT = 0.1; % time from the question to the onset of the test word
+B.RespT = 2.0; % time for the trial number
 
 RSTime       = 60; % Resting State time. Two blocks of this *4 will be run
 RestingPause = 20; % Pause in seconds between Resting State Blocks
 
 %%
+try
 SetupHardware;
 IniHardware;
 PreLoadText;
-GraphicParams;
 SetFolders;
 PreLoadStim;
 Bsetup;
@@ -37,7 +38,7 @@ ListenChar(2);
 
 %% -------------------------------------------------------------------------
 %  Start to run the experiment
-try
+
     %HideCursor
     
     %%
@@ -49,9 +50,11 @@ try
     end
     
     %%
-    RestingBlock;
+    %RestingBlock;
     
     %% Standard block
+    
+    % Print instructions
     DrawFormattedText(theWindow, t_blocks,'center','center',255);
     Screen('Flip', theWindow);
     
@@ -59,40 +62,13 @@ try
     display('Ready to start');
     
     press_space(c_space) % waits till space is pressed
-    display('Start Standard');
-    
-    pickstream_std = randperm(20,1);
-    B.s             = pickstream_std;
-    B.isSTD         = 1;
-    B.Stim          = Stim;
-    B.StimCat       = StimCat;
+    display('Start!!');
     
     B = RunBlock( B );
     
     WaitSecs(20);
     
-    %% Deviant blocks
-    pickstream_dev = randperm(20,12);
-    B.isSTD        = 0;
-    
-    for b = pickstream_dev
-        B.BlockCounter = B.BlockCounter + 1;
-        B.s            = b;
-        
-        display(['Start Deviant Block: ', num2str(B.BlockCounter-1)]);
-        
-        B = RunBlock( B );
-        
-        WaitSecs(20);
-        if ~mod(B.BlockCounter-1,4); display('Press space to continue'); press_space(c_space); end
-    end
-    
-    %% Test Block
-    
-    display('Ready for Test Block. Press Space to start.');
-    press_space(c_space);
-    
-    B = RunTestBlock( B );
+   
     
     %% CleanUp
     NetStation('StopRecording');

@@ -4,10 +4,7 @@ function [ B ] = RunBlock( B )
 
 %% Load stream information to send TCP/IP mark when there is a deviant
 
-if B.isSTD, sf = 'STD'; else sf = 'DEV'; end
-if B.isSTD, Bt = 'Lear'; else Bt = 'Devi'; end
-
-NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'start', 'strm', B.s);
+% NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'start', 'strm', B.s);
 load(fullfile(B.p_streams_I,sf,['S_',num2str(B.s),'.mat']));
 
 B.WordLists(B.BlockCounter, 1:length(words)) = words;
@@ -16,22 +13,22 @@ B.WordLists(B.BlockCounter, 1:length(words)) = words;
 Screen(B.theWindow,'TextSize',B.textsize*4);
 DrawFormattedText(B.theWindow,'+','center','center',255);
 Screen('Flip', B.theWindow);
-pahandle = PsychPortAudio('Open', [], [], 1, B.fs  , 2);
 
 NetStation('Synchronize');
 
 for w = 1:length(words)
-    PsychPortAudio('FillBuffer', pahandle, B.Stim{words(w)}'*.5);
     
     Event = ['wr',num2str(words(w))];
     NetStation('Event',Event, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', num2str(words(w)), 'strm', B.s);
-    PsychPortAudio('Start', pahandle, 1, 0, 1);
     
     if B.useET
         [~, ~, ~,~] = tetio_readGazeData;  % ET buffer cleaning
     end
     
+    B = ShowWord(B,w);
+    
     SOA = .650 + 1.8 + .4*rand;
+    
     GetMouseClick;
     
     if B.useET
@@ -53,7 +50,7 @@ NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'stop', '
 PsychPortAudio('Stop', pahandle);
 PsychPortAudio('Close', pahandle);
 
-% Instructions. Tets phase
+% Instructions
 Screen(B.theWindow,'TextSize',B.textsize);
 DrawFormattedText(B.theWindow,'Puoi prendere una piccola pausa','center','center',255);
 %DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);

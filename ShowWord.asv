@@ -1,0 +1,27 @@
+function [ B ] = ShowWord( B, w )
+%SHOWWORD Summary of this function goes here
+%   Detailed explanation goes here
+
+[cx, cy] = WindowCenter(B.theWindow);
+
+inx = (B.res(1) - size(B.I{1},2) - size(B.I{2},2) - size(B.I{3},2))/2;
+
+pos = [inx;
+    cy - 125;
+    inx + size(B.I{1},2);
+    cy + 125];
+
+Screen('DrawTexture', B.theWindow, B.Char{w},[],pos);
+
+pos = [pos(3)+1;
+    cy - 125;
+    pos(3)+1 + size(B.I{2},2);
+    cy + 125];
+
+Screen('DrawTexture', B.theWindow, B.Char{w},[],pos);
+
+
+Screen('Flip', theWindow);
+
+end
+
