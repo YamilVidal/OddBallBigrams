@@ -23,13 +23,12 @@ defans      = {'99';...
 
 answer = inputdlg(prompt,'Subject Info',1,defans);
 
-sbj.n       = str2double(answer{1});
-sbj.name    = answer{2};
-sbj.gender  = answer{3};
-sbj.age     = str2double(answer{4});
-sbj.hand    = answer{5};
-sbj.lang    = answer{6};
-debugmode   = logical(str2double(answer{7}));
-debugaudio  = logical(str2double(answer{8}));
-useEEG      = logical(str2double(answer{9}));
-useET       = logical(str2double(answer{10}));
+E.sbj.n       = str2double(answer{1});
+E.sbj.name    = answer{2};
+E.sbj.gender  = answer{3};
+E.sbj.age     = str2double(answer{4});
+E.sbj.hand    = answer{5};
+E.sbj.lang    = answer{6};
+E.debugmode   = logical(str2double(answer{7}));
+E.useEEG      = logical(str2double(answer{9}));
+E.useET       = logical(str2double(answer{10}));

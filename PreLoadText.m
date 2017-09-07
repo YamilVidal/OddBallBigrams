@@ -5,5 +5,5 @@ T_Blocks         = 'Instructions_Blocks.txt'; % text file for the second instruc
 % Regular blocks
 id       = fopen(fullfile(pwd, T_Blocks));
 t_blocks = textscan(id,'%c','whitespace','');
-t_blocks = t_blocks{1}';
+E.text.t_blocks = t_blocks{1}';
 fclose(id);

@@ -1,23 +1,34 @@
 % Open the screen
 PsychImaging('PrepareConfiguration');
 
-if debugmode
-    [theWindow] = Screen('OpenWindow', screenN, [127 127 127], [0 0 60 60], clrdepth);
+if E.debugmode
+    [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.background, [0 0 60 60], E.screen.clrdepth);
 else
-    [theWindow] = Screen('OpenWindow', screenN, [127 127 127], [], clrdepth);
+    [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.bckgrnd, [], E.screen.clrdepth);
 end
 
 % Set Text Format
-Screen(theWindow,'FillRect',127);
-Screen(theWindow,'TextFont','Arial');
-Screen(theWindow,'TextSize',B.textsize);
+Screen(E.screen.theWindow,'FillRect',127);
+Screen(E.screen.theWindow,'TextFont','Arial');
+Screen(E.screen.theWindow,'TextSize',E.screen.textsize);
 
 % Maximum priority level
-topPriorityLevel = MaxPriority(theWindow);
+topPriorityLevel = MaxPriority(E.screen.theWindow);
 Priority(topPriorityLevel);
 
 % Collect the time for the first flip with vbl
-info.screen.vbl = Screen(theWindow, 'Flip');
+E.screen.vbl = Screen(E.screen.theWindow, 'Flip');
 
 % Query the frame duration
-info.screen.flipinterval = Screen('GetFlipInterval',theWindow);
+E.screen.flipinterval = Screen('GetFlipInterval',E.screen.theWindow);
+
+% EyeTracker
+if E.useET
+    tetio_init();
+    trackerId = 'TT120-208-10200804';
+    tetio_connectTracker(trackerId)
+    currentFrameRate = tetio_getFrameRate;
+    if not(currentFrameRate==60),error('ET sampling rate not 60'),end
+    disp('eyetracker OK')
+    tetio_startTracking;
+end

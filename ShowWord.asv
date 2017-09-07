@@ -25,9 +25,9 @@ pos = [pos(3);
     pos(3) + size(E.Stim.I{w},2);
     pos(4)];
 
-Screen('DrawTexture', E.screen.theWindow, E.Stim.Char{w},[],pos);
+Screen('DrawTexture', B.theWindow, B.Char{w},[],pos);
 
-Screen('Flip', E.screen.theWindow);
+Screen('Flip', B.theWindow);
 
 %WaitSecs(B.PresT)
 

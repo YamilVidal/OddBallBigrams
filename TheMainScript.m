@@ -4,32 +4,32 @@ function TheMainScript
 %% Parameters
 
 % Experiment name
-exp_name = 'OddBallBigrams';
+E.exp_name = 'OddBallBigrams';
 
 GetSubInfo;
 
 % Name of the output file
-filename = [exp_name '-' num2str(sbj.n) '-' sbj.name '-' datestr(now, 'dd-mm-yyyy')];
+E.filename = [E.exp_name '-' num2str(E.sbj.n) '-' E.sbj.name '-' datestr(now, 'dd-mm-yyyy')];
 
 %% Timing
 
-NBlocks = 5;
-NWords  = 200;
+E.times.NBlocks = 5; % Number of Blocks
+E.times.NWords  = 200;
 
-B.PresT = 0.1; % time from the question to the onset of the test word
-B.RespT = 2.0; % time for the trial number
+E.times.PresT = 0.1; % time from the question to the onset of the test word
+E.times.RespT = 2.0; % time for the trial number
 
-RSTime       = 60; % Resting State time. Two blocks of this *4 will be run
-RestingPause = 20; % Pause in seconds between Resting State Blocks
+E.times.RSTime       = 60; % Resting State time. Two blocks of this *4 will be run
+E.times.RestingPause = 20; % Pause in seconds between Resting State Blocks
+
+E.times.BlockCounter = 1;
 
 %%
 try
 SetupHardware;
 IniHardware;
 PreLoadText;
-SetFolders;
 PreLoadStim;
-Bsetup;
 
 %%
 
@@ -52,11 +52,11 @@ ListenChar(2);
     %%
     %RestingBlock;
     
-    %% Standard block
+    %% Run Block
     
     % Print instructions
-    DrawFormattedText(theWindow, t_blocks,'center','center',255);
-    Screen('Flip', theWindow);
+    DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
+    Screen('Flip', E.screen.theWindow);
     
     %WaitSecs(pausetime);
     display('Ready to start');
@@ -64,7 +64,7 @@ ListenChar(2);
     press_space(c_space) % waits till space is pressed
     display('Start!!');
     
-    B = RunBlock( B );
+    E = RunBlock( E );
     
     WaitSecs(20);
     

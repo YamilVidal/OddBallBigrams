@@ -1,4 +1,4 @@
-function [ B ] = RunBlock( B )
+function [ E ] = RunBlock( E )
 %RUNBLOCK Run a block of audio stim.
 
 
