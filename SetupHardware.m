@@ -30,7 +30,7 @@ if useET
 end
 
 % Store the useful information
-info.screen.resolution  = res;
+info.screen.resolution  = B.res;
 info.screen.windowsize  = window;
 info.screen.rec         = rec;
 info.sbj                = sbj;
