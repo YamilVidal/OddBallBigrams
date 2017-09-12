@@ -5,39 +5,30 @@ function [ E ] = RunBlock( E )
 %% Load stream information to send TCP/IP mark when there is a deviant
 
 % NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'start', 'strm', B.s);
-load(fullfile(B.p_streams_I,sf,['S_',num2str(B.s),'.mat']));
 
-B.WordLists(B.BlockCounter, 1:length(words)) = words;
+%%
+% Screen(B.theWindow,'TextSize',B.textsize*4);
+% DrawFormattedText(B.theWindow,'+','center','center',255);
+% Screen('Flip', B.theWindow);
 
-%% Start playing the familiarization sound
-Screen(B.theWindow,'TextSize',B.textsize*4);
-DrawFormattedText(B.theWindow,'+','center','center',255);
-Screen('Flip', B.theWindow);
+% NetStation('Synchronize');
 
-NetStation('Synchronize');
-
-for w = 1:length(words)
+for w = 1:E.times.NWords
     
-    Event = ['wr',num2str(words(w))];
-    NetStation('Event',Event, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', num2str(words(w)), 'strm', B.s);
-    
-    if B.useET
-        [~, ~, ~,~] = tetio_readGazeData;  % ET buffer cleaning
-    end
-    
-    B = ShowWord(B,w);
+%     Event = ['wr',num2str(words(w))];
+%     NetStation('Event',Event, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', num2str(words(w)), 'strm', B.s);
+%     
+%     if B.useET
+%         [~, ~, ~,~] = tetio_readGazeData;  % ET buffer cleaning
+%     end
+
+    W = E.Stim.WordLists(E.times.BlockCounter,w);
+    ShowWord(E,W);
     
     SOA = .650 + 1.8 + .4*rand;
     
     GetMouseClick;
-    
-    if B.useET
-        [lefteye, righteye, timestamp] = tetio_readGazeData;
-        
-        B.ET.Left(B.BlockCounter,w,1:size(lefteye,1),:)    = lefteye;
-        B.ET.Right(B.BlockCounter,w,1:size(lefteye,1),:)   = righteye;
-        B.ET.Timestamp(B.BlockCounter,w,1:size(lefteye,1)) = timestamp;
-    end
+
     
     STOP = 0;
     STOP = press_ctrlalt(B.Keys.c_alt, B.Keys.c_ctrl); % if ctrl+alt are pressed it moves to the test phase
@@ -45,17 +36,18 @@ for w = 1:length(words)
     press_escape(B.Keys.c_escape) % generate an error and exit if escape is pressed
 end
 
-NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'stop', 'strm', B.s);
+%NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'stop', 'strm', B.s);
 
-PsychPortAudio('Stop', pahandle);
-PsychPortAudio('Close', pahandle);
+E.times.BlockCounter = E.times.BlockCounter+1;
 
 % Instructions
 Screen(B.theWindow,'TextSize',B.textsize);
 DrawFormattedText(B.theWindow,'Puoi prendere una piccola pausa','center','center',255);
 %DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);
 Screen('Flip', B.theWindow);
-display('End of Bock');
+display(['End of Bock ',num2str(E.times.BlockCounter)]);
+
+E.times.BlockCounter = E.times.BlockCounter+1;
 
 end
 

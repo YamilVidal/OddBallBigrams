@@ -1,5 +1,3 @@
 Change responses from Keyboard to Response Box
 
-Stim List
-
-Do I need to save Number of words??
+When done, switch on character shuffling

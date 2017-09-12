@@ -13,7 +13,7 @@ E.filename = [E.exp_name '-' num2str(E.sbj.n) '-' E.sbj.name '-' datestr(now, 'd
 
 %% Timing
 
-E.times.NBlocks = 5; % Number of Blocks
+E.times.NBlocks = 3; % Number of Blocks
 E.times.NWords  = 200;
 
 E.times.PresT = 0.1; % time from the question to the onset of the test word
@@ -43,11 +43,11 @@ ListenChar(2);
     
     %%
     % Connect to NetStation and start recording if successfull
-    if useEEG
-        EEGstatus = NetStation('Connect', '10.0.0.46');
-        if EEGstatus; error('Connection to NetStation failed'); end
-        NetStation('StartRecording');
-    end
+%     if useEEG
+%         EEGstatus = NetStation('Connect', '10.0.0.46');
+%         if EEGstatus; error('Connection to NetStation failed'); end
+%         NetStation('StartRecording');
+%     end
     
     %%
     %RestingBlock;
@@ -55,8 +55,8 @@ ListenChar(2);
     %% Run Block
     
     % Print instructions
-    DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
-    Screen('Flip', E.screen.theWindow);
+%     DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
+%     Screen('Flip', E.screen.theWindow);
     
     %WaitSecs(pausetime);
     display('Ready to start');
