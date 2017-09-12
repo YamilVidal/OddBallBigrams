@@ -16,10 +16,10 @@ end
 
 %% Shuffle characters
 
-% s = randperm(length(E.Stim.Char));
-% 
-% E.Stim.I    = E.Stim.I(s);
-% E.Stim.Char = E.Stim.Char(s);
+s = randperm(length(E.Stim.Char));
+
+E.Stim.I    = E.Stim.I(s);
+E.Stim.Char = E.Stim.Char(s);
 
 %%
 

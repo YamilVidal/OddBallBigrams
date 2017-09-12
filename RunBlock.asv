@@ -1,5 +1,5 @@
 function [ E ] = RunBlock( E )
-%RUNBLOCK Run a block
+%RUNBLOCK Run a block of audio stim.
 
 
 %% Load stream information to send TCP/IP mark when there is a deviant
@@ -18,27 +18,34 @@ for w = 1:E.times.NWords
     
 %     Event = ['wr',num2str(words(w))];
 %     NetStation('Event',Event, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', num2str(words(w)), 'strm', B.s);
+%     
+%     if B.useET
+%         [~, ~, ~,~] = tetio_readGazeData;  % ET buffer cleaning
+%     end
 
     W = E.Stim.WordLists(E.times.BlockCounter,w);
     ShowWord(E,W);
-        
+    
+    
     GetMouseClick;
 
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
     DrawFormattedText(E.screen.theWindow,'+','center','center',255);
     Screen('Flip', E.screen.theWindow);
     WaitSecs(E.times.SOA + rand*.5);
+
+    WaitSecs(E.times.SOA + rand*.5);
+    
     
     STOP = 0;
-    STOP = press_ctrlalt(E.keys.c_alt, E.keys.c_ctrl); % if ctrl+alt are pressed, ends the Block and continues
+    STOP = press_ctrlalt(B.Keys.c_alt, B.Keys.c_ctrl); % if ctrl+alt are pressed, ends the Block and continues
     if STOP; break; end
-    press_escape(E.keys.c_escape) % generate an error and exit if escape is pressed
+    press_escape(B.Keys.c_escape) % generate an error and exit if escape is pressed
 end
 
 %NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'stop', 'strm', B.s);
 
-%% Instructions
-Screen(E.screen.theWindow,'TextSize',E.screen.textsize*2);
+% Instructions
 DrawFormattedText(E.screen.theWindow,'Puoi prendere una piccola pausa','center','center',255);
 %DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);
 Screen('Flip', E.screen.theWindow);

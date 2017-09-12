@@ -31,8 +31,7 @@ Screen('DrawTexture', E.screen.theWindow, E.Stim.Char{Words(w,3)},[],pos);
 
 Screen('Flip', E.screen.theWindow);
 
-%WaitSecs(B.PresT)
-
-%Screen('Flip', B.theWindow);
+WaitSecs(E.times.PresT);
+Screen('Flip', E.screen.theWindow);
 end
 

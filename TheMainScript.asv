@@ -83,7 +83,8 @@ ListenChar(2);
     
     % DisplayAllAnswers;
     
-    %% Save the data
+    %% ---------------------------------------------------------------------
+    % 4. Save the data
     
     save(fullfile(p_data,E.filename), 'E');
     
@@ -109,7 +110,8 @@ catch err
     
     NetStation('StopRecording');
     NetStation('Disconnect');
-    
+   
+ 
     %clear; close all
 end
 
