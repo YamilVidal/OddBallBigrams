@@ -14,6 +14,8 @@ for w = 1:E.times.NWords
     
     GetMouseClick;
     
+    WaitSecs(E.times.SOA + rand*.5);
+    
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
     DrawFormattedText(E.screen.theWindow,'+','center','center',255);
     Screen('Flip', E.screen.theWindow);
@@ -26,10 +28,6 @@ for w = 1:E.times.NWords
 end
 
 %% Instructions
-Screen(E.screen.theWindow,'TextSize',E.screen.textsize*2);
-DrawFormattedText(E.screen.theWindow,'Puoi prendere una piccola pausa','center','center',255);
-%DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);
-Screen('Flip', E.screen.theWindow);
 display(['End of Bock ',num2str(E.times.BlockCounter)]);
 
 E.times.BlockCounter = E.times.BlockCounter+1;

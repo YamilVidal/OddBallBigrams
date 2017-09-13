@@ -7,6 +7,9 @@ else
     [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.bckgrnd, [], E.screen.clrdepth);
 end
 
+% Enable transparency
+Screen('BlendFunction',E.screen.theWindow, 'GL_SRC_ALPHA','GL_ONE_MINUS_SRC_ALPHA');
+
 % Set Text Format
 Screen(E.screen.theWindow,'FillRect',127);
 Screen(E.screen.theWindow,'TextFont','Arial');

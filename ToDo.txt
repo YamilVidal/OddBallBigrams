@@ -1,2 +1,8 @@
 Change responses from Keyboard to Response Box
 
+Move everything to a single Trial field
+
+
+
+%%
+Fill times in Excel

@@ -11,5 +11,6 @@ while    ((GetSecs-starttime) < E.times.RespT )
     if MousePress == 1
         E.ClickTime(E.times.BlockCounter,w) = GetSecs-starttime;
         MousePress = 2;
+        break
     end
 end
