@@ -6,11 +6,12 @@ WordListPath   = fullfile(pwd, 'WordLists');
 
 %% Load all characters
 
+E.Stim.C    = randperm(10,9);
 E.Stim.I    = cell(9,1);
 E.Stim.Char = cell(9,1);
 
-for n = 1:length(E.Stim.Char)
-    I = imread(fullfile(StimPath,[num2str(n),'.jpg']));
+for n = 1:length(E.Stim.C)
+    I = imread(fullfile(StimPath,[num2str(E.Stim.C(n)),'.jpg']));
     
     I(I>100) = 255; % Make sure texture is pure black and white
     I(I<100) = 0;
@@ -32,6 +33,8 @@ E.Stim.I    = E.Stim.I(s);
 E.Stim.Char = E.Stim.Char(s);
 
 %%
+
+E.Stim.Scale = .3; % Scale of the stim on screen
 
 E.Stim.StimList     = randperm(3,E.times.NBlocks);
 E.Stim.WordLists    = nan(E.times.NBlocks,E.times.NWords);

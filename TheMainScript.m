@@ -21,7 +21,7 @@ E.times.RespT = 5.5; % time to give response
 E.times.SOA   = 0.5; % Actual SOA is this plus rand from 0 to .5. This in addition to RespT.
 
 E.times.Break     = 10; % Break between blocks
-E.times.CountDown = 5; % Break between blocks
+E.times.CountDown = 5; % Break between blocks countdown
 
 E.times.BlockCounter = 1;
 

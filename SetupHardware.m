@@ -7,7 +7,7 @@ E.screen.window   = 1*E.screen.res; % size of the window were the experiment is 
 E.screen.rec      = [E.screen.res - E.screen.window E.screen.res]; % position of the window where the experiment is shown
 E.screen.clrdepth = 32;
 E.screen.textsize = 20; % text size for the instructions
-E.screen.bckgrnd  = [127 127 127];
+E.screen.bckgrnd  = [255 255 255];
 
 % Detect the code of some relevant keys
 KbName('UnifyKeyNames')

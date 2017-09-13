@@ -11,7 +11,6 @@ end
 Screen('BlendFunction',E.screen.theWindow, 'GL_SRC_ALPHA','GL_ONE_MINUS_SRC_ALPHA');
 
 % Set Text Format
-Screen(E.screen.theWindow,'FillRect',127);
 Screen(E.screen.theWindow,'TextFont','Arial');
 Screen(E.screen.theWindow,'TextSize',E.screen.textsize);
 
