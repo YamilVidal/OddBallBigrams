@@ -1,3 +1,2 @@
 Change responses from Keyboard to Response Box
 
-When done, switch on character shuffling

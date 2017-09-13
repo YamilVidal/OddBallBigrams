@@ -1,29 +1,19 @@
 function [ E ] = RunBlock( E )
 %RUNBLOCK Run a block
 
-
-%% Load stream information to send TCP/IP mark when there is a deviant
-
-% NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'start', 'strm', B.s);
-
 %%
 Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
 DrawFormattedText(E.screen.theWindow,'+','center','center',255);
 Screen('Flip', E.screen.theWindow);
 WaitSecs(E.times.SOA + rand*.5);
 
-% NetStation('Synchronize');
-
 for w = 1:E.times.NWords
     
-%     Event = ['wr',num2str(words(w))];
-%     NetStation('Event',Event, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', num2str(words(w)), 'strm', B.s);
-
     W = E.Stim.WordLists(E.times.BlockCounter,w);
     ShowWord(E,W);
-        
+    
     GetMouseClick;
-
+    
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
     DrawFormattedText(E.screen.theWindow,'+','center','center',255);
     Screen('Flip', E.screen.theWindow);
@@ -34,8 +24,6 @@ for w = 1:E.times.NWords
     if STOP; break; end
     press_escape(E.keys.c_escape) % generate an error and exit if escape is pressed
 end
-
-%NetStation('Event',Bt, GetSecs, 0.001, 'bloc', B.BlockCounter, 'type', 'stop', 'strm', B.s);
 
 %% Instructions
 Screen(E.screen.theWindow,'TextSize',E.screen.textsize*2);
@@ -54,8 +42,9 @@ if any(keyCode)
     key = find(keyCode);
     K = repmat(thekey,numel(key),1)==repmat(key',1,numel(thekey));
     if any(any(K))
-        NetStation('StopRecording');
-        NetStation('Disconnect');
+        Screen('CloseAll');
+        ShowCursor;
+        ListenChar;
         error('Exp:Aborted', 'Escape was press')
     end
 end
@@ -72,5 +61,4 @@ if any(any(K1)) &&  any(any(K2))
 else
     var = 0;
 end
-%end
 end

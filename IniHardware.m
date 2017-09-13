@@ -22,13 +22,3 @@ E.screen.vbl = Screen(E.screen.theWindow, 'Flip');
 % Query the frame duration
 E.screen.flipinterval = Screen('GetFlipInterval',E.screen.theWindow);
 
-% EyeTracker
-if E.useET
-    tetio_init();
-    trackerId = 'TT120-208-10200804';
-    tetio_connectTracker(trackerId)
-    currentFrameRate = tetio_getFrameRate;
-    if not(currentFrameRate==60),error('ET sampling rate not 60'),end
-    disp('eyetracker OK')
-    tetio_startTracking;
-end

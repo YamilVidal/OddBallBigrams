@@ -26,40 +26,24 @@ E.times.RestingPause = 20; % Pause in seconds between Resting State Blocks
 E.times.BlockCounter = 1;
 
 E.ClickTime = nan(E.times.NBlocks,E.times.NWords);
- 
+
 %%
 try
-SetupHardware;
-IniHardware;
-PreLoadText;
-PreLoadStim;
-
-%%
-
-ListenChar(2);
-
-
-%% -------------------------------------------------------------------------
-%  Start to run the experiment
-
+    SetupHardware;
+    IniHardware;
+    PreLoadText;
+    PreLoadStim;
+    
+    %% Start to run the experiment
+    ListenChar(2);
+    
     %HideCursor
-    
-    %%
-    % Connect to NetStation and start recording if successfull
-%     if useEEG
-%         EEGstatus = NetStation('Connect', '10.0.0.46');
-%         if EEGstatus; error('Connection to NetStation failed'); end
-%         NetStation('StartRecording');
-%     end
-    
-    %%
-    %RestingBlock;
     
     %% Run Block
     
     % Print instructions
-%     DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
-%     Screen('Flip', E.screen.theWindow);
+    %     DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
+    %     Screen('Flip', E.screen.theWindow);
     
     %WaitSecs(pausetime);
     display('Ready to start');
@@ -71,12 +55,8 @@ ListenChar(2);
         E = RunBlock( E );
         WaitSecs(20);
     end
-   
     
     %% CleanUp
-    NetStation('StopRecording');
-    NetStation('Disconnect');
-    
     Screen('CloseAll');
     ShowCursor;
     ListenChar;
@@ -87,17 +67,11 @@ ListenChar(2);
     
     save(fullfile(p_data,E.filename), 'E');
     
-    % ---------------------------------------------------------------------
-    % 
     disp('The experiment finished correctly');
     disp(['The data was saved in ' E.filename]);
     
-    
-    %%
-    %clear all; close all;
-    
 catch err
-    if exist([E.filename '.mat'],'var')==2; filename = [E.filename '_i']; end
+    if exist([E.filename '.mat'],'var')==2; E.filename = [E.filename '_i']; end
     save(fullfile(pwd,'Crashed',E.filename))
     disp('There was an arror')
     display(err);
@@ -106,34 +80,9 @@ catch err
     Screen('CloseAll');
     ShowCursor;
     ListenChar;
-    
-    NetStation('StopRecording');
-    NetStation('Disconnect');
-    
-    %clear; close all
 end
 
-%% ========================================================================
 %% Auxiliar Functions
-
-function press_escape(thekey) % if escape is pressed it generates an error
-[~, ~, keyCode, ~] = KbCheck;
-if any(keyCode)
-    key = find(keyCode);
-    K = repmat(thekey,numel(key),1)==repmat(key',1,numel(thekey));
-    if any(any(K))
-        NetStation('StopRecording');
-        NetStation('Disconnect');
-        
-        if B.useET
-            tetio_stopTracking;
-            tetio_disconnectTracker;
-            tetio_cleanUp;
-        end
-        
-        error('Exp:Aborted', 'Escape was press')
-    end
-end
 
 function press_space(thekey) % stay in the loop (wait) till space is pressed
 while 1
@@ -146,4 +95,3 @@ while 1
         end
     end
 end
-
