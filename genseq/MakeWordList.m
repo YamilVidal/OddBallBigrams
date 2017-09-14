@@ -38,7 +38,7 @@ S = [];
 ck = true(6,1);
 
 while any(ck)
-    S   = GenSequence( 6, Stds, 2 ); % Identity of the Std
+    S   = GenSequence( 6, Stds, 1 ); % Identity of the Std
     
     for n = 1:6
        ck(n) = abs(sum(S == n) - floor(Stds/6))>1;
@@ -66,7 +66,7 @@ S = [];
 ck = true(6,1);
 
 while any(ck)
-    S   = GenSequence( 6, 12, 2 ); % Identity of the Std
+    S   = GenSequence( 6, 12, 1 ); % Identity of the Std
     
     for n = 1:6
         ck(n) = sum(S == n) ~= 2;

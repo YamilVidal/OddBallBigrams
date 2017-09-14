@@ -1,5 +1,4 @@
-
-for n = 1:5
+for n = 1:20
     
     ck = true;
     

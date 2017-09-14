@@ -3,9 +3,10 @@ function [ E ] = RunBlock( E )
 
 %% Trial loop
 for w = 1:E.times.NWords
+    display(['Trial ',num2str(w)]);
     
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
-    DrawFormattedText(E.screen.theWindow,'+','center',440,E.screen.textcolor);
+    DrawFormattedText(E.screen.theWindow,'+','center', E.screen.cy - E.screen.textsize*5/1.5, E.screen.textcolor);
     %DrawFormattedText(E.screen.theWindow,'+',E.screen.cx,E.screen.cy,E.screen.textcolor);
     Screen('Flip', E.screen.theWindow);
     WaitSecs(E.times.SOA + rand*.5);

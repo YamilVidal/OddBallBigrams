@@ -9,7 +9,7 @@ E.exp_name = 'OddBallBigrams';
 GetSubInfo;
 
 % Name of the output file
-E.filename = [E.exp_name '-' num2str(E.sbj.n) '-' E.sbj.name '-' datestr(now, 'dd-mm-yyyy')];
+E.filename = [E.exp_name '-' num2str(E.sbj.n) '-' datestr(now, 'dd-mm-yyyy')];
 
 %%
 try

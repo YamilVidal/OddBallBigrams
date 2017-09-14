@@ -3,7 +3,5 @@ Add Keyboard and Response Box
 Move everything to a single Trial field
 
 
-
-
 %%
 Fill times in Excel
