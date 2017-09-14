@@ -20,11 +20,7 @@ try
     PreLoadStim;
     
     %% Start to run the experiment
-
-    
-    %HideCursor
-    
-    %% Run Block  
+    %% Run Block
     display('Ready to start');
     press_space(E.keys.c_space) % waits till space is pressed
     display('Start!!');
@@ -34,19 +30,20 @@ try
         if b ~= E.times.NBlocks; TakeBreak(E); end
     end
     
-    %% CleanUp
-    Screen('CloseAll');
-    ShowCursor;
-    ListenChar;
-    
-    % DisplayAllAnswers;
-    
-    %% Save the data
+     %% Save the data
     
     save(fullfile(p_data,E.filename), 'E');
     
     disp('The experiment finished correctly');
     disp(['The data was saved in ' E.filename]);
+    
+    %% Thank participant and CleanUp
+    ThankYou;
+    Screen('CloseAll');
+    ShowCursor;
+    ListenChar;
+    
+    % DisplayAllAnswers;
     
 catch err
     E.err = err;
