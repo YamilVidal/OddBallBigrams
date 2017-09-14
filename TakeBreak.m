@@ -1,14 +1,13 @@
 function [  ] = TakeBreak( E )
 
 Screen(E.screen.theWindow,'TextSize',E.screen.textsize*2);
-DrawFormattedText(E.screen.theWindow,'Puoi prendere una piccola pausa','center','center',255);
+DrawFormattedText(E.screen.theWindow,'Puoi prendere una piccola pausa','center','center',E.screen.textcolor);
 %DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);
 Screen('Flip', E.screen.theWindow);
 
 for c = 1:E.times.Break - E.times.CountDown; % Break between blocks    
     WaitSecs(1);
     
-    STOP = 0;
     STOP = press_ctrlalt(E.keys.c_alt, E.keys.c_ctrl); % if ctrl+alt are pressed, ends the Block and continues
     if STOP; break; end
 end
@@ -16,12 +15,11 @@ end
 for c = 1:E.times.CountDown % Break between blocks (CountDown)
     if STOP; break; end
     
-    DrawFormattedText(E.screen.theWindow,['Pausa finisce in ', num2str(E.times.CountDown+1 - c)],'center','center',255);
+    DrawFormattedText(E.screen.theWindow,['Pausa finisce in ', num2str(E.times.CountDown+1 - c)],'center','center',E.screen.textcolor);
     %DrawFormattedText(theWindow,'Puoi prendere una piccola pausa \n Premi la BARRA per continuare','center','center',255);
     Screen('Flip', E.screen.theWindow);
     WaitSecs(1);
     
-    STOP = 0;
     STOP = press_ctrlalt(E.keys.c_alt, E.keys.c_ctrl); % if ctrl+alt are pressed, ends the Block and continues
     if STOP; break; end
 end

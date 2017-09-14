@@ -9,7 +9,7 @@ while    ((GetSecs-starttime) < E.times.RespT )
         MousePress = any(buttons); %sets to 1 if a button was pressed
     end
     if MousePress == 1
-        E.ClickTime(E.times.BlockCounter,w) = GetSecs-starttime;
+        E.RespTime(E.times.BlockCounter,w) = GetSecs-starttime;
         MousePress = 2;
         break
     end

@@ -10,6 +10,9 @@ end
 % Enable transparency
 Screen('BlendFunction',E.screen.theWindow, 'GL_SRC_ALPHA','GL_ONE_MINUS_SRC_ALPHA');
 
+[E.screen.cx, E.screen.cy] = WindowCenter(E.screen.theWindow);
+
+
 % Set Text Format
 Screen(E.screen.theWindow,'TextFont','Arial');
 Screen(E.screen.theWindow,'TextSize',E.screen.textsize);
@@ -23,4 +26,6 @@ E.screen.vbl = Screen(E.screen.theWindow, 'Flip');
 
 % Query the frame duration
 E.screen.flipinterval = Screen('GetFlipInterval',E.screen.theWindow);
+
+ListenChar(2);
 

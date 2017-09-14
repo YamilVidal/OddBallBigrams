@@ -1,14 +1,14 @@
 function [ E ] = RunBlock( E )
 %RUNBLOCK Run a block
 
-%% Trial loop
+%%
+Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
+DrawFormattedText(E.screen.theWindow,'+','center','center',E.screen.textcolor);
+Screen('Flip', E.screen.theWindow);
+WaitSecs(E.times.SOA + rand*.5);
+
 for w = 1:E.times.NWords
     
-    Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
-    DrawFormattedText(E.screen.theWindow,'+','center',440,E.screen.textcolor);
-    %DrawFormattedText(E.screen.theWindow,'+',E.screen.cx,E.screen.cy,E.screen.textcolor);
-    Screen('Flip', E.screen.theWindow);
-    WaitSecs(E.times.SOA + rand*.5);
     
     W = E.Stim.WordLists(E.times.BlockCounter,w);
     ShowWord(E,W);
@@ -16,6 +16,11 @@ for w = 1:E.times.NWords
     E = GetKeyResp(E,w);
     
     WaitSecs(E.times.SOA + rand*.5);
+    
+%     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
+%     DrawFormattedText(E.screen.theWindow,'+','center','center',E.screen.textcolor);
+%     Screen('Flip', E.screen.theWindow);
+%     WaitSecs(E.times.SOA + rand*.5);
     
     STOP = press_ctrlalt(E.keys.c_alt, E.keys.c_ctrl); % if ctrl+alt are pressed, ends the Block and continues
     if STOP; break; end

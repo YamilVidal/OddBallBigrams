@@ -1,6 +1,7 @@
-Change responses from Keyboard to Response Box
+Add Keyboard and Response Box
 
 Move everything to a single Trial field
+
 
 
 

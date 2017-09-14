@@ -11,42 +11,21 @@ GetSubInfo;
 % Name of the output file
 E.filename = [E.exp_name '-' num2str(E.sbj.n) '-' E.sbj.name '-' datestr(now, 'dd-mm-yyyy')];
 
-%% Timing
-
-E.times.NBlocks = 3; % Number of Blocks
-E.times.NWords  = 3;
-
-E.times.PresT = 0.1; % time from the question to the onset of the test word
-E.times.RespT = 5.5; % time to give response
-E.times.SOA   = 0.5; % Actual SOA is this plus rand from 0 to .5. This in addition to RespT.
-
-E.times.Break     = 10; % Break between blocks
-E.times.CountDown = 5; % Break between blocks countdown
-
-E.times.BlockCounter = 1;
-
-E.ClickTime = nan(E.times.NBlocks,E.times.NWords);
-
 %%
 try
+    SetupTiming;
     SetupHardware;
     IniHardware;
     PreLoadText;
     PreLoadStim;
     
     %% Start to run the experiment
-    ListenChar(2);
+
     
     %HideCursor
     
-    %% Run Block
-    
-    % Print instructions
-    %     DrawFormattedText(E.screen.theWindow, E.text.t_blocks,'center','center',255);
-    %     Screen('Flip', E.screen.theWindow);
-    
+    %% Run Block  
     display('Ready to start');
-    
     press_space(E.keys.c_space) % waits till space is pressed
     display('Start!!');
     
@@ -70,6 +49,7 @@ try
     disp(['The data was saved in ' E.filename]);
     
 catch err
+    E.err = err;
     if exist([E.filename '.mat'],'var')==2; E.filename = [E.filename '_i']; end
     save(fullfile(pwd,'Crashed',E.filename))
     disp('There was an arror')
