@@ -1,9 +1,9 @@
 
 E.times.NBlocks = 3; % Number of Blocks
-E.times.NWords  = 200; % Max is 200
+E.times.NWords  = 3; % Max is 200
 
 E.times.PresT = 0.1; % time from the question to the onset of the test word
-E.times.RespT = 2.0; % time to give response
+E.times.RespT = 5.0; % time to give response
 E.times.SOA   = 0.5; % Actual SOA is this plus rand from 0 to .5. This in addition to RespT.
 
 E.times.Break     = 10; % Break between blocks

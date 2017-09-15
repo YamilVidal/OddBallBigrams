@@ -42,6 +42,7 @@ try
     Screen('CloseAll');
     ShowCursor;
     ListenChar;
+    if E.RespBox.use; CedrusResponseBox('CloseAll'); end
     
     % DisplayAllAnswers;
     
@@ -56,6 +57,7 @@ catch err
     Screen('CloseAll');
     ShowCursor;
     ListenChar;
+    if E.RespBox.use; CedrusResponseBox('CloseAll'); end
 end
 
 %% Auxiliar Functions

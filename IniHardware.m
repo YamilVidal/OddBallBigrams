@@ -2,7 +2,7 @@
 PsychImaging('PrepareConfiguration');
 
 if E.debugmode
-    [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.background, [0 0 60 60], E.screen.clrdepth);
+    [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.bckgrnd, [0 0 200 200], E.screen.clrdepth);
 else
     [E.screen.theWindow] = Screen('OpenWindow', E.screen.screenN, E.screen.bckgrnd, [], E.screen.clrdepth);
 end
@@ -29,3 +29,7 @@ E.screen.flipinterval = Screen('GetFlipInterval',E.screen.theWindow);
 
 ListenChar(2);
 
+if E.RespBox.use
+    CedrusResponseBox('CloseAll');
+    E.RespBox.hdl     = CedrusResponseBox('Open', 'COM4'); %open port
+end
