@@ -1,6 +1,6 @@
 
 E.times.NBlocks = 3; % Number of Blocks
-E.times.NWords  = 3; % Max is 200
+E.times.NWords  = 200; % Max is 200
 
 E.times.PresT = 0.1; % time from the question to the onset of the test word
 E.times.RespT = 5.0; % time to give response

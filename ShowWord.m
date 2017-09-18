@@ -30,4 +30,5 @@ pos = [pos(3);
 Screen('DrawTexture', E.screen.theWindow, E.Stim.Char{Words(w,3)},[],pos);
 
 Screen('Flip', E.screen.theWindow);
+
 end
