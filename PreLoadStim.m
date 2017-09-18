@@ -6,7 +6,7 @@ WordListPath   = fullfile(pwd, 'WordLists');
 
 %% Load all characters
 
-E.Stim.C    = randperm(9,9)+3;
+E.Stim.C    = randperm(13,9);
 E.Stim.I    = cell(9,1);
 E.Stim.Char = cell(9,1);
 
