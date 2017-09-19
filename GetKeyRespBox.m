@@ -1,4 +1,10 @@
 function [ E ] = GetKeyRespBox( E, w )
+
+while 1 %Make sure subject has released key before starting the trial:
+    Stat = CedrusResponseBox('FlushEvents', E.RespBox.hdl);
+    if ~any(Stat(1,:)); break; end
+end
+
 starttime = GetSecs;
 CedrusResponseBox('ResetRTTimer', E.RespBox.hdl);
 

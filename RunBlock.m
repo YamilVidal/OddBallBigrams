@@ -5,14 +5,6 @@ function [ E ] = RunBlock( E )
 for w = 1:E.times.NWords
     display(['Trial ',num2str(w)]);
     
-    if E.RespBox.use
-        while 1 %Make sure subject has released key before starting the trial:
-            Stat = CedrusResponseBox('FlushEvents', E.RespBox.hdl);
-            if ~any(Stat(1,:)); break; end
-        end
-        % WaitSecs(.1);
-    end
-    
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
     DrawFormattedText(E.screen.theWindow,'+','center', E.screen.cy - E.screen.textsize*5/1.5, E.screen.textcolor);
     %DrawFormattedText(E.screen.theWindow,'+',E.screen.cx,E.screen.cy,E.screen.textcolor);
