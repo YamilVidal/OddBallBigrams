@@ -36,7 +36,7 @@ E.Stim.Char = E.Stim.Char(s);
 
 E.Stim.Scale = .3; % Scale of the stim on screen
 
-E.Stim.StimList     = randperm(3,E.times.NBlocks);
+E.Stim.StimList     = randperm(20,E.times.NBlocks);
 E.Stim.WordLists    = nan(E.times.NBlocks,E.times.NWords);
 
 E.Stim.Words = [1,2,4;
