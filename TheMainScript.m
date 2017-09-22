@@ -25,6 +25,9 @@ try
     press_space(E.keys.c_space) % waits till space is pressed
     display('Start!!');
     
+    E = RunLearningBlock( E );
+    TakeBreak(E);
+    
     for b = 1:E.times.NBlocks
         E = RunBlock( E );
         if b ~= E.times.NBlocks; TakeBreak(E); end
