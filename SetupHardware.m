@@ -11,7 +11,7 @@ E.screen.clrdepth = 32;
 E.screen.textsize  = 20; % text size for the instructions
 E.screen.textcolor = 0; % text size for the instructions
 
-E.screen.bckgrnd  = [255 255 255];
+E.screen.bckgrnd  = repmat(100,1,3);
 
 % Detect the code of some relevant keys
 KbName('UnifyKeyNames')

@@ -3,7 +3,7 @@ function [ E ] = RunBlock( E )
 
 %% Trial loop
 for w = 1:E.times.NWords
-    display(['Trial ',num2str(w)]);
+    display(['Block: ',num2str(E.times.BlockCounter),' Trial: ',num2str(w)]);
     
     Screen(E.screen.theWindow,'TextSize',E.screen.textsize*5);
     DrawFormattedText(E.screen.theWindow,'+','center', E.screen.cy - E.screen.textsize*5/1.5, E.screen.textcolor);

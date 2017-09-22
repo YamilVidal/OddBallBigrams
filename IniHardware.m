@@ -31,5 +31,5 @@ ListenChar(2);
 
 if E.RespBox.use
     CedrusResponseBox('CloseAll');
-    E.RespBox.hdl     = CedrusResponseBox('Open', 'COM4'); %open port
+    E.RespBox.hdl     = CedrusResponseBox('Open', 'COM3'); %open port
 end

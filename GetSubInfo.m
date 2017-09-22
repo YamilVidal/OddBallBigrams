@@ -17,7 +17,7 @@ defans      = {'99';...
 
 answer = inputdlg(prompt,'Subject Info',1,defans);
 
-E.sbj.n       = str2double(answer{1});
+E.sbj.n       = answer{1};
 E.sbj.gender  = answer{2};
 E.sbj.age     = str2double(answer{3});
 E.sbj.hand    = answer{4};
