@@ -2,7 +2,7 @@
 
 StimPath       = fullfile(pwd, 'Stimuli');
 p_data         = fullfile(pwd, 'Data');
-WordListPath   = fullfile(pwd, 'WordLists');
+WordListPath   = fullfile(pwd, 'WordLists', 'DevBlocks');
 
 %% Load all characters
 

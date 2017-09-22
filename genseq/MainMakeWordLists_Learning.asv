@@ -1,12 +1,10 @@
-Lists = cell(20,1);
-
-parfor n = 1:length(Lists)
+parfor n = 1:20
     
     ck = true;
     
     while ck
         words = MakeWordList_Learning();
-        w = 50;
+        w = 30;
         h = [];
         
         for i = 1:length(words)-w
@@ -16,11 +14,6 @@ parfor n = 1:length(Lists)
         ck = any(abs(h(:) - 1/6) > .1);
     end
     
-    Lists{n} = words;
-end
-
-
-for n = 1:length(Lists)
-    words = Lists{n};
     save(['S_Learn_',num2str(n),'.mat'],'words')
 end
+

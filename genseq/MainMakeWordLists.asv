@@ -1,6 +1,6 @@
 Lists = cell(20,1);
 
-parfor n = 1:length(Lists)
+parfor n = 1:20
     
     ck = [true true];
     
@@ -36,9 +36,9 @@ parfor n = 1:length(Lists)
     
     Lists{n} = words;
     display(['List ', num2str(n),' created']);
+    %save(['S_',num2str(n),'.mat'],'words')
 end
 
 for n = 1:length(Lists)
-    words = Lists{n};
-    save(['S_',num2str(n),'.mat'],'words')
+    
 end
