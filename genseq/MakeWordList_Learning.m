@@ -1,0 +1,16 @@
+function [Seq] = MakeWordList_Learning()
+
+Seq       = [];
+TotLength = 200;
+
+ck = true(6,1);
+
+while any(ck)
+    Seq   = GenSequence( 6, TotLength, 1 ); % Identity of the Std
+    
+    for n = 1:6
+        ck(n) = abs(sum(Seq == n) - TotLength/6) > 3;
+    end
+end
+
+end
