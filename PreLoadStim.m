@@ -2,7 +2,9 @@
 
 StimPath       = fullfile(pwd, 'Stimuli');
 p_data         = fullfile(pwd, 'Data');
-WordListPath   = fullfile(pwd, 'WordLists', 'DevBlocks');
+
+WordListPathLearn = fullfile(pwd, 'WordLists', 'Learning');
+WordListPath      = fullfile(pwd, 'WordLists', 'DevBlocks');
 
 %% Load all characters
 
@@ -32,25 +34,32 @@ s = randperm(length(E.Stim.Char));
 E.Stim.I    = E.Stim.I(s);
 E.Stim.Char = E.Stim.Char(s);
 
-%%
-
 E.Stim.Scale = .3; % Scale of the stim on screen
 
-E.Stim.StimList     = randperm(20,E.times.NBlocks);
-E.Stim.WordLists    = nan(E.times.NBlocks,E.times.NWords);
+%% By all means, don't touch this, as it defines the statistical structure of the stimuli
 
 E.Stim.Words = [1,2,4;
-                5,2,3;
-                1,6,3;
-                7,8,4;
-                5,8,9;
-                7,6,9;
-                1,2,3;
-                7,8,9;
-                5,6,4];
+    5,2,3;
+    1,6,3;
+    7,8,4;
+    5,8,9;
+    7,6,9;
+    1,2,3;
+    7,8,9;
+    5,6,4];
 
+%%
+E.Stim.StimListLearn  = randperm(20,1);
+
+E.Stim.StimList       = randperm(20,E.times.NBlocks);
+E.Stim.WordLists      = nan(E.times.NBlocks,E.times.NWords);
+
+% Load just one list for the learning block
+load(fullfile(WordListPathLearn,['S_Learn_',num2str(E.Stim.StimListLearn),'.mat']));
+E.Stim.WordListsLearn = words(1:E.times.NWords);
+
+% Load all the lists for the blocks containing deviants
 for L = 1:length(E.Stim.StimList)
     load(fullfile(WordListPath,['S_',num2str(E.Stim.StimList(L)),'.mat']));
-    
     E.Stim.WordLists(L,1:E.times.NWords) = words(1:E.times.NWords);
 end
