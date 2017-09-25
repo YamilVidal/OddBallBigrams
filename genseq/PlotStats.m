@@ -1,7 +1,7 @@
 close
 clear h
 
-w = 20;
+w = 50;
 
 for n = 1:200-w
     h(n,:) = hist(words(n:n+(w-1)),numel(unique(words)))/w;

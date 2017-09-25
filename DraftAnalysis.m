@@ -1,7 +1,7 @@
 Resp  = E.Resp(:);
 Words = E.Stim.WordLists(:);
 RT    = E.RespTime(:);
-%%
+%
 
 rem = isnan(Resp);
 
@@ -9,7 +9,7 @@ Resp(rem)  = [];
 Words(rem) = [];
 RT(rem)    = [];
 
-%%
+%
 
 WD = Words == 7 | Words == 8;
 BD = Words == 9;
@@ -17,7 +17,7 @@ BD = Words == 9;
 SW = Words <=6;
 
 
-%%
+%
 
 WD_Hits    = mean(~Resp(WD))
 BD_Hits    = mean(~Resp(BD))

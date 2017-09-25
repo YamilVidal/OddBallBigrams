@@ -1,6 +1,6 @@
 %% Screen parameters
 % E.screen.screenN = max(Screen('Screens'));  % screen where the experiment is shown
-E.screen.screenN  = 1;
+E.screen.screenN  = 2;
 ScreenData        = Screen('Resolution',E.screen.screenN);
 E.screen.res      = [ScreenData.width ScreenData.height];
 E.screen.window   = 1*E.screen.res; % size of the window were the experiment is shown
@@ -22,3 +22,5 @@ E.keys.c_ctrl    = KbName('LeftControl');
 E.keys.c_alt     = KbName('LeftAlt');
 E.keys.c_ans1key = KbName('z');
 E.keys.c_ans2key = KbName('m');
+
+E.keys.ResKey    = '2.Left';
